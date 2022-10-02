@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5.59f; // horizontal speed of player. ////We can edit this value later in the Unity editor.
 
     ////add these after you have showed movement left and right on Unity
+    [SerializeField] private bool isReversed = false;
     [SerializeField] private float jumpForce = 500f; // jump force of player
                             ////you could also type public float jumpForce
     private bool jump; // true if player is on the ground and about to jump, false otherwise
@@ -53,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         // horizontal movement detection (a & d or left & right arrows): -1 is left, 1 is right
-        horDir = Input.GetAxisRaw("Horizontal");
+        horDir = isReversed ? -Input.GetAxisRaw("Horizontal") : Input.GetAxisRaw("Horizontal");
         vertDir = Input.GetAxisRaw("Vertical");
 
         //animator.SetFloat("Speed", Mathf.Abs(horDir)); 
